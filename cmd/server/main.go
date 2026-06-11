@@ -29,6 +29,7 @@ func (app *App) RegisterRouters() {
 	routers.SetupAuthRouter(v1Router, app.Logger)
 
 	// setup food item router
+	routers.SetupFoodItemRouter(v1Router, app.Logger)
 }
 
 func (app *App) Run() {
