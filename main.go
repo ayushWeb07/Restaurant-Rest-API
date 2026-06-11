@@ -6,6 +6,7 @@ import (
 	"github.com/ayushWeb07/Restaurant-Rest-API/cmd/server"
 	"github.com/ayushWeb07/Restaurant-Rest-API/internal/config"
 	"github.com/gin-gonic/gin"
+	"github.com/go-playground/validator/v10"
 )
 
 func main() {
@@ -14,6 +15,13 @@ func main() {
 
 	if err != nil {
 		log.Fatal(err)
+	}
+
+	// validate the server config
+	validate := validator.New()
+
+	if validationErr := validate.Struct(serverCfg); validationErr != nil {
+		log.Fatal("Failed while validating the server config: " + validationErr.Error())
 	}
 
 	// create the logger instance
