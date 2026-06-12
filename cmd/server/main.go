@@ -30,6 +30,9 @@ func (app *App) RegisterRouters() {
 
 	// setup food item router
 	routers.SetupFoodItemRouter(v1Router, app.Logger)
+
+	// setup invoice router
+	routers.SetupInvoiceRouter(v1Router, app.Logger)
 }
 
 func (app *App) Run() {
