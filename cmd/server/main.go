@@ -39,6 +39,9 @@ func (app *App) RegisterRouters() {
 
 	// setup order router
 	routers.SetupOrderRouter(v1Router, app.Logger)
+
+	// setup order item router
+	routers.SetupOrderItemRouter(v1Router, app.Logger)
 }
 
 func (app *App) Run() {
