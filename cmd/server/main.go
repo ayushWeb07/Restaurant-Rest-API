@@ -4,6 +4,7 @@ import (
 	"github.com/ayushWeb07/Restaurant-Rest-API/internal/config"
 	"github.com/ayushWeb07/Restaurant-Rest-API/internal/routers"
 	"github.com/gin-gonic/gin"
+	"go.mongodb.org/mongo-driver/v2/mongo"
 	"go.uber.org/zap"
 )
 
@@ -16,6 +17,7 @@ type App struct {
 	ServerConfig *config.ServerConfig
 	Logger       *zap.Logger
 	Router       *gin.Engine
+	MongoClient  *mongo.Client
 }
 
 func (app *App) RegisterRouters() {
