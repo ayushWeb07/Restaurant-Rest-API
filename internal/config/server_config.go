@@ -7,8 +7,10 @@ import (
 )
 
 type ServerConfig struct {
-	Port   string `validate:"required"`
-	AppEnv string `validate:"required"`
+	Port         string `validate:"required"`
+	AppEnv       string `validate:"required"`
+	MongoUri     string `validate:"required"`
+	DatabaseName string `validate:"required"`
 }
 
 func LoadServerConfig() (*ServerConfig, error) {
@@ -21,8 +23,10 @@ func LoadServerConfig() (*ServerConfig, error) {
 
 	// load the envs & create the config instance
 	cfg := &ServerConfig{
-		Port:   LoadSingleEnvVar("PORT", "3000"),
-		AppEnv: LoadSingleEnvVar("APP_ENV", "development"),
+		Port:         LoadSingleEnvVar("PORT", "3000"),
+		AppEnv:       LoadSingleEnvVar("APP_ENV", "development"),
+		MongoUri:     LoadSingleEnvVar("MONGO_URI", ""),
+		DatabaseName: LoadSingleEnvVar("DATABASE_NAME", ""),
 	}
 
 	return cfg, nil
