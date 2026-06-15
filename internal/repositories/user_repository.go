@@ -2,6 +2,7 @@ package repositories
 
 import (
 	"github.com/ayushWeb07/Restaurant-Rest-API/internal/config"
+	"github.com/ayushWeb07/Restaurant-Rest-API/internal/interfaces"
 	"go.mongodb.org/mongo-driver/v2/mongo"
 	"go.uber.org/zap"
 )
@@ -26,4 +27,14 @@ func (userRepository *UserRepository) UpdateUserById() {
 
 func (userRepository *UserRepository) DeleteUserById() {
 	userRepository.Logger.Info("User Repo -> DeleteUserById")
+}
+
+func NewUserRepository(serverConfig *config.ServerConfig, logger *zap.Logger, mongoClient *mongo.Client) interfaces.UserRepositoryInterface {
+	userRepository := &UserRepository{
+		ServerConfig: serverConfig,
+		Logger:       logger,
+		MongoClient:  mongoClient,
+	}
+
+	return userRepository
 }

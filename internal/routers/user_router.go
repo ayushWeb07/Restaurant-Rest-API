@@ -30,3 +30,14 @@ func (userRouter *UserRouter) Register(router *gin.RouterGroup) {
 	// delete /:id -> delete user by id
 	userRouterGroup.DELETE("/:id", userRouter.UserController.DeleteUserById())
 }
+
+func NewUserRouter(serverConfig *config.ServerConfig, logger *zap.Logger, userController interfaces.UserControllerInterface, mongoClient *mongo.Client) interfaces.RouterInterface {
+	userRouter := &UserRouter{
+		ServerConfig:   serverConfig,
+		Logger:         logger,
+		UserController: userController,
+		MongoClient:    mongoClient,
+	}
+
+	return userRouter
+}

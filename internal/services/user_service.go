@@ -33,3 +33,14 @@ func (userService *UserService) DeleteUserById() {
 	userService.Logger.Info("User Service -> GetAllUsers")
 	userService.UserRepository.DeleteUserById()
 }
+
+func NewUserService(serverConfig *config.ServerConfig, logger *zap.Logger, userRepository interfaces.UserRepositoryInterface, mongoClient *mongo.Client) interfaces.UserServiceInterface {
+	userService := &UserService{
+		ServerConfig:   serverConfig,
+		Logger:         logger,
+		UserRepository: userRepository,
+		MongoClient:    mongoClient,
+	}
+
+	return userService
+}

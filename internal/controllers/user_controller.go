@@ -44,3 +44,14 @@ func (userController *UserController) DeleteUserById() gin.HandlerFunc {
 		c.JSON(http.StatusOK, gin.H{"method": "GET"})
 	}
 }
+
+func NewUserController(serverConfig *config.ServerConfig, logger *zap.Logger, userService interfaces.UserServiceInterface, mongoClient *mongo.Client) interfaces.UserControllerInterface {
+	userController := &UserController{
+		ServerConfig: serverConfig,
+		Logger:       logger,
+		UserService:  userService,
+		MongoClient:  mongoClient,
+	}
+
+	return userController
+}

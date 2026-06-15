@@ -28,32 +28,10 @@ func (app *App) RegisterRouters() {
 	v1Router := app.Router.Group("/api/v1")
 
 	// setup user router
-	userRepository := &repositories.UserRepository{
-		ServerConfig: app.ServerConfig,
-		Logger:       app.Logger,
-		MongoClient:  app.MongoClient,
-	}
-
-	userService := &services.UserService{
-		ServerConfig:   app.ServerConfig,
-		Logger:         app.Logger,
-		UserRepository: userRepository,
-		MongoClient:    app.MongoClient,
-	}
-
-	userController := &controllers.UserController{
-		ServerConfig: app.ServerConfig,
-		Logger:       app.Logger,
-		UserService:  userService,
-		MongoClient:  app.MongoClient,
-	}
-
-	userRouter := &routers.UserRouter{
-		ServerConfig:   app.ServerConfig,
-		Logger:         app.Logger,
-		UserController: userController,
-		MongoClient:    app.MongoClient,
-	}
+	userRepository := repositories.NewUserRepository(app.ServerConfig, app.Logger, app.MongoClient)
+	userService := services.NewUserService(app.ServerConfig, app.Logger, userRepository, app.MongoClient)
+	userController := controllers.NewUserController(app.ServerConfig, app.Logger, userService, app.MongoClient)
+	userRouter := routers.NewUserRouter(app.ServerConfig, app.Logger, userController, app.MongoClient)
 
 	userRouter.Register(v1Router)
 
