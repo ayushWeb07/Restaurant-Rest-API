@@ -11,11 +11,6 @@ import (
 	"go.uber.org/zap"
 )
 
-type AppInterface interface {
-	Run()
-	RegisterRouters()
-}
-
 type App struct {
 	ServerConfig *config.ServerConfig
 	Logger       *zap.Logger
