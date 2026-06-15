@@ -1,40 +1,32 @@
 package routers
 
 import (
-	"net/http"
-
+	"github.com/ayushWeb07/Restaurant-Rest-API/internal/config"
+	"github.com/ayushWeb07/Restaurant-Rest-API/internal/interfaces"
 	"github.com/gin-gonic/gin"
+	"go.mongodb.org/mongo-driver/v2/mongo"
 	"go.uber.org/zap"
 )
 
-func SetupUserRouter(router *gin.RouterGroup, logger *zap.Logger) {
-	userRouter := router.Group("/users")
+type UserRouter struct {
+	ServerConfig   *config.ServerConfig
+	Logger         *zap.Logger
+	UserController interfaces.UserControllerInterface
+	MongoClient    *mongo.Client
+}
+
+func (userRouter *UserRouter) Register(router *gin.RouterGroup) {
+	userRouterGroup := router.Group("/users")
 
 	// get / -> get all users
-	userRouter.GET("", func(c *gin.Context) {
-		c.JSON(http.StatusNotImplemented, gin.H{
-			"status": "UP",
-		})
-	})
+	userRouterGroup.GET("", userRouter.UserController.GetAllUsers())
 
 	// get /:id -> get user by id
-	userRouter.GET("/:id", func(c *gin.Context) {
-		c.JSON(http.StatusNotImplemented, gin.H{
-			"status": "UP",
-		})
-	})
+	userRouterGroup.GET("/:id", userRouter.UserController.GetUserById())
 
 	// put /:id -> update user by id
-	userRouter.PUT("/:id", func(c *gin.Context) {
-		c.JSON(http.StatusNotImplemented, gin.H{
-			"status": "UP",
-		})
-	})
+	userRouterGroup.PUT("/:id", userRouter.UserController.UpdateUserById())
 
 	// delete /:id -> delete user by id
-	userRouter.DELETE("/:id", func(c *gin.Context) {
-		c.JSON(http.StatusNotImplemented, gin.H{
-			"status": "UP",
-		})
-	})
+	userRouterGroup.DELETE("/:id", userRouter.UserController.DeleteUserById())
 }

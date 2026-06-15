@@ -2,7 +2,10 @@ package server
 
 import (
 	"github.com/ayushWeb07/Restaurant-Rest-API/internal/config"
+	"github.com/ayushWeb07/Restaurant-Rest-API/internal/controllers"
+	"github.com/ayushWeb07/Restaurant-Rest-API/internal/repositories"
 	"github.com/ayushWeb07/Restaurant-Rest-API/internal/routers"
+	"github.com/ayushWeb07/Restaurant-Rest-API/internal/services"
 	"github.com/gin-gonic/gin"
 	"go.mongodb.org/mongo-driver/v2/mongo"
 	"go.uber.org/zap"
@@ -25,7 +28,34 @@ func (app *App) RegisterRouters() {
 	v1Router := app.Router.Group("/api/v1")
 
 	// setup user router
-	routers.SetupUserRouter(v1Router, app.Logger)
+	userRepository := &repositories.UserRepository{
+		ServerConfig: app.ServerConfig,
+		Logger:       app.Logger,
+		MongoClient:  app.MongoClient,
+	}
+
+	userService := &services.UserService{
+		ServerConfig:   app.ServerConfig,
+		Logger:         app.Logger,
+		UserRepository: userRepository,
+		MongoClient:    app.MongoClient,
+	}
+
+	userController := &controllers.UserController{
+		ServerConfig: app.ServerConfig,
+		Logger:       app.Logger,
+		UserService:  userService,
+		MongoClient:  app.MongoClient,
+	}
+
+	userRouter := &routers.UserRouter{
+		ServerConfig:   app.ServerConfig,
+		Logger:         app.Logger,
+		UserController: userController,
+		MongoClient:    app.MongoClient,
+	}
+
+	userRouter.Register(v1Router)
 
 	// setup auth router
 	routers.SetupAuthRouter(v1Router, app.Logger)
