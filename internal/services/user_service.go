@@ -20,17 +20,17 @@ func (userService *UserService) GetAllUsers() {
 }
 
 func (userService *UserService) GetUserById() {
-	userService.Logger.Info("User Service -> GetAllUsers")
+	userService.Logger.Info("User Service -> GetUserById")
 	userService.UserRepository.GetUserById()
 }
 
 func (userService *UserService) UpdateUserById() {
-	userService.Logger.Info("User Service -> GetAllUsers")
+	userService.Logger.Info("User Service -> UpdateUserById")
 	userService.UserRepository.UpdateUserById()
 }
 
 func (userService *UserService) DeleteUserById() {
-	userService.Logger.Info("User Service -> GetAllUsers")
+	userService.Logger.Info("User Service -> DeleteUserById")
 	userService.UserRepository.DeleteUserById()
 }
 

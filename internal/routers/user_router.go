@@ -2,7 +2,10 @@ package routers
 
 import (
 	"github.com/ayushWeb07/Restaurant-Rest-API/internal/config"
+	"github.com/ayushWeb07/Restaurant-Rest-API/internal/controllers"
 	"github.com/ayushWeb07/Restaurant-Rest-API/internal/interfaces"
+	"github.com/ayushWeb07/Restaurant-Rest-API/internal/repositories"
+	"github.com/ayushWeb07/Restaurant-Rest-API/internal/services"
 	"github.com/gin-gonic/gin"
 	"go.mongodb.org/mongo-driver/v2/mongo"
 	"go.uber.org/zap"
@@ -31,7 +34,11 @@ func (userRouter *UserRouter) Register(router *gin.RouterGroup) {
 	userRouterGroup.DELETE("/:id", userRouter.UserController.DeleteUserById())
 }
 
-func NewUserRouter(serverConfig *config.ServerConfig, logger *zap.Logger, userController interfaces.UserControllerInterface, mongoClient *mongo.Client) interfaces.RouterInterface {
+func NewUserRouter(serverConfig *config.ServerConfig, logger *zap.Logger, mongoClient *mongo.Client) interfaces.RouterInterface {
+	userRepository := repositories.NewUserRepository(serverConfig, logger, mongoClient)
+	userService := services.NewUserService(serverConfig, logger, userRepository, mongoClient)
+	userController := controllers.NewUserController(serverConfig, logger, userService, mongoClient)
+
 	userRouter := &UserRouter{
 		ServerConfig:   serverConfig,
 		Logger:         logger,
