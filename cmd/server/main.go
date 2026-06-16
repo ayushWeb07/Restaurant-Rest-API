@@ -32,7 +32,8 @@ func (app *App) RegisterRouters() {
 	foodItemRouter.Register(v1Router)
 
 	// setup invoice router
-	routers.SetupInvoiceRouter(v1Router, app.Logger)
+	invoiceRouter := routers.NewInvoiceRouter(app.ServerConfig, app.Logger, app.MongoClient)
+	invoiceRouter.Register(v1Router)
 
 	// setup menu router
 	routers.SetupMenuRouter(v1Router, app.Logger)

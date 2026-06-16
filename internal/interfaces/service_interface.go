@@ -19,3 +19,11 @@ type FoodItemServiceInterface interface {
 	UpdateFoodItemById()
 	DeleteFoodItemById()
 }
+
+type InvoiceServiceInterface interface {
+	CreateInvoice()
+	GetAllInvoices()
+	GetInvoiceById()
+	UpdateInvoiceById()
+	DeleteInvoiceById()
+}

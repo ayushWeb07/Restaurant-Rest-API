@@ -14,3 +14,11 @@ type FoodItemRepositoryInterface interface {
 	UpdateFoodItemById()
 	DeleteFoodItemById()
 }
+
+type InvoiceRepositoryInterface interface {
+	CreateInvoice()
+	GetAllInvoices()
+	GetInvoiceById()
+	UpdateInvoiceById()
+	DeleteInvoiceById()
+}

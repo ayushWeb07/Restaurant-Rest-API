@@ -21,3 +21,11 @@ type FoodItemControllerInterface interface {
 	UpdateFoodItemById() gin.HandlerFunc
 	DeleteFoodItemById() gin.HandlerFunc
 }
+
+type InvoiceControllerInterface interface {
+	CreateInvoice() gin.HandlerFunc
+	GetAllInvoices() gin.HandlerFunc
+	GetInvoiceById() gin.HandlerFunc
+	UpdateInvoiceById() gin.HandlerFunc
+	DeleteInvoiceById() gin.HandlerFunc
+}
