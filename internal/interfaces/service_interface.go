@@ -6,3 +6,8 @@ type UserServiceInterface interface {
 	UpdateUserById()
 	DeleteUserById()
 }
+
+type AuthServiceInterface interface {
+	RegisterUser()
+	LoginUser()
+}

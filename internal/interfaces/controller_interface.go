@@ -8,3 +8,8 @@ type UserControllerInterface interface {
 	UpdateUserById() gin.HandlerFunc
 	DeleteUserById() gin.HandlerFunc
 }
+
+type AuthControllerInterface interface {
+	RegisterUser() gin.HandlerFunc
+	LoginUser() gin.HandlerFunc
+}

@@ -24,7 +24,8 @@ func (app *App) RegisterRouters() {
 	userRouter.Register(v1Router)
 
 	// setup auth router
-	routers.SetupAuthRouter(v1Router, app.Logger)
+	authRouter := routers.NewAuthRouter(app.ServerConfig, app.Logger, app.MongoClient)
+	authRouter.Register(v1Router)
 
 	// setup food item router
 	routers.SetupFoodItemRouter(v1Router, app.Logger)
