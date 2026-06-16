@@ -6,3 +6,11 @@ type UserRepositoryInterface interface {
 	UpdateUserById()
 	DeleteUserById()
 }
+
+type FoodItemRepositoryInterface interface {
+	CreateFoodItem()
+	GetAllFoodItems()
+	GetFoodItemById()
+	UpdateFoodItemById()
+	DeleteFoodItemById()
+}

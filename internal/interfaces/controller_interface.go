@@ -13,3 +13,11 @@ type AuthControllerInterface interface {
 	RegisterUser() gin.HandlerFunc
 	LoginUser() gin.HandlerFunc
 }
+
+type FoodItemControllerInterface interface {
+	CreateFoodItem() gin.HandlerFunc
+	GetAllFoodItems() gin.HandlerFunc
+	GetFoodItemById() gin.HandlerFunc
+	UpdateFoodItemById() gin.HandlerFunc
+	DeleteFoodItemById() gin.HandlerFunc
+}
