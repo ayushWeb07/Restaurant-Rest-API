@@ -37,3 +37,11 @@ type MenuControllerInterface interface {
 	UpdateMenuById() gin.HandlerFunc
 	DeleteMenuById() gin.HandlerFunc
 }
+
+type OrderControllerInterface interface {
+	CreateOrder() gin.HandlerFunc
+	GetAllOrders() gin.HandlerFunc
+	GetOrderById() gin.HandlerFunc
+	UpdateOrderById() gin.HandlerFunc
+	DeleteOrderById() gin.HandlerFunc
+}

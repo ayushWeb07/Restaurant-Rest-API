@@ -40,7 +40,8 @@ func (app *App) RegisterRouters() {
 	menuRouter.Register(v1Router)
 
 	// setup order router
-	routers.SetupOrderRouter(v1Router, app.Logger)
+	orderRouter := routers.NewOrderRouter(app.ServerConfig, app.Logger, app.MongoClient)
+	orderRouter.Register(v1Router)
 
 	// setup order item router
 	routers.SetupOrderItemRouter(v1Router, app.Logger)

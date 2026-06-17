@@ -30,3 +30,11 @@ type MenuRepositoryInterface interface {
 	UpdateMenuById()
 	DeleteMenuById()
 }
+
+type OrderRepositoryInterface interface {
+	CreateOrder()
+	GetAllOrders()
+	GetOrderById()
+	UpdateOrderById()
+	DeleteOrderById()
+}

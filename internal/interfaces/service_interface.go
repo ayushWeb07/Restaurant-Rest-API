@@ -35,3 +35,11 @@ type MenuServiceInterface interface {
 	UpdateMenuById()
 	DeleteMenuById()
 }
+
+type OrderServiceInterface interface {
+	CreateOrder()
+	GetAllOrders()
+	GetOrderById()
+	UpdateOrderById()
+	DeleteOrderById()
+}
