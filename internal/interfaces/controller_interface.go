@@ -53,3 +53,11 @@ type TableControllerInterface interface {
 	UpdateTableById() gin.HandlerFunc
 	DeleteTableById() gin.HandlerFunc
 }
+
+type OrderItemControllerInterface interface {
+	CreateOrderItem() gin.HandlerFunc
+	GetAllOrderItemsByOrderId() gin.HandlerFunc
+	GetOrderItemById() gin.HandlerFunc
+	UpdateOrderItemById() gin.HandlerFunc
+	DeleteOrderItemById() gin.HandlerFunc
+}

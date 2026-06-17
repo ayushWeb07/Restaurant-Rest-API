@@ -46,3 +46,11 @@ type TableRepositoryInterface interface {
 	UpdateTableById()
 	DeleteTableById()
 }
+
+type OrderItemRepositoryInterface interface {
+	CreateOrderItem()
+	GetAllOrderItemsByOrderId()
+	GetOrderItemById()
+	UpdateOrderItemById()
+	DeleteOrderItemById()
+}

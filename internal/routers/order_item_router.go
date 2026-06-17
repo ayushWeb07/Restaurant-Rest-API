@@ -1,47 +1,53 @@
 package routers
 
 import (
-	"net/http"
-
+	"github.com/ayushWeb07/Restaurant-Rest-API/internal/config"
+	"github.com/ayushWeb07/Restaurant-Rest-API/internal/controllers"
+	"github.com/ayushWeb07/Restaurant-Rest-API/internal/interfaces"
+	"github.com/ayushWeb07/Restaurant-Rest-API/internal/repositories"
+	"github.com/ayushWeb07/Restaurant-Rest-API/internal/services"
 	"github.com/gin-gonic/gin"
+	"go.mongodb.org/mongo-driver/v2/mongo"
 	"go.uber.org/zap"
 )
 
-func SetupOrderItemRouter(router *gin.RouterGroup, logger *zap.Logger) {
-	orderItemRouter := router.Group("/order-items")
+type OrderItemRouter struct {
+	ServerConfig        *config.ServerConfig
+	Logger              *zap.Logger
+	OrderItemController interfaces.OrderItemControllerInterface
+	MongoClient         *mongo.Client
+}
 
-	// post / -> create a new order item
-	orderItemRouter.POST("", func(c *gin.Context) {
-		c.JSON(http.StatusNotImplemented, gin.H{
-			"status": "UP",
-		})
-	})
+func (orderItemRouter *OrderItemRouter) Register(router *gin.RouterGroup) {
+	orderItemRouterGroup := router.Group("/order-items")
 
-	// get /order/:orderId -> get all order items of an order by id
-	orderItemRouter.GET("/order/:orderId", func(c *gin.Context) {
-		c.JSON(http.StatusNotImplemented, gin.H{
-			"status": "UP",
-		})
-	})
+	// create / -> create order item
+	orderItemRouterGroup.POST("", orderItemRouter.OrderItemController.CreateOrderItem())
+
+	// get / -> get all order items by order id
+	orderItemRouterGroup.GET("/order/:orderId", orderItemRouter.OrderItemController.GetAllOrderItemsByOrderId())
 
 	// get /:id -> get order item by id
-	orderItemRouter.GET("/:id", func(c *gin.Context) {
-		c.JSON(http.StatusNotImplemented, gin.H{
-			"status": "UP",
-		})
-	})
+	orderItemRouterGroup.GET("/:id", orderItemRouter.OrderItemController.GetOrderItemById())
 
 	// put /:id -> update order item by id
-	orderItemRouter.PUT("/:id", func(c *gin.Context) {
-		c.JSON(http.StatusNotImplemented, gin.H{
-			"status": "UP",
-		})
-	})
+	orderItemRouterGroup.PUT("/:id", orderItemRouter.OrderItemController.UpdateOrderItemById())
 
 	// delete /:id -> delete order item by id
-	orderItemRouter.DELETE("/:id", func(c *gin.Context) {
-		c.JSON(http.StatusNotImplemented, gin.H{
-			"status": "UP",
-		})
-	})
+	orderItemRouterGroup.DELETE("/:id", orderItemRouter.OrderItemController.DeleteOrderItemById())
+}
+
+func NewOrderItemRouter(serverConfig *config.ServerConfig, logger *zap.Logger, mongoClient *mongo.Client) interfaces.RouterInterface {
+	orderItemRepository := repositories.NewOrderItemRepository(serverConfig, logger, mongoClient)
+	orderItemService := services.NewOrderItemService(serverConfig, logger, orderItemRepository, mongoClient)
+	orderItemController := controllers.NewOrderItemController(serverConfig, logger, orderItemService, mongoClient)
+
+	orderItemRouter := &OrderItemRouter{
+		ServerConfig:        serverConfig,
+		Logger:              logger,
+		OrderItemController: orderItemController,
+		MongoClient:         mongoClient,
+	}
+
+	return orderItemRouter
 }
