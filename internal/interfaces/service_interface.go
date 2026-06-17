@@ -27,3 +27,11 @@ type InvoiceServiceInterface interface {
 	UpdateInvoiceById()
 	DeleteInvoiceById()
 }
+
+type MenuServiceInterface interface {
+	CreateMenu()
+	GetAllMenus()
+	GetMenuById()
+	UpdateMenuById()
+	DeleteMenuById()
+}

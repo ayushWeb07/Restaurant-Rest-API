@@ -22,3 +22,11 @@ type InvoiceRepositoryInterface interface {
 	UpdateInvoiceById()
 	DeleteInvoiceById()
 }
+
+type MenuRepositoryInterface interface {
+	CreateMenu()
+	GetAllMenus()
+	GetMenuById()
+	UpdateMenuById()
+	DeleteMenuById()
+}

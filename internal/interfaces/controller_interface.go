@@ -29,3 +29,11 @@ type InvoiceControllerInterface interface {
 	UpdateInvoiceById() gin.HandlerFunc
 	DeleteInvoiceById() gin.HandlerFunc
 }
+
+type MenuControllerInterface interface {
+	CreateMenu() gin.HandlerFunc
+	GetAllMenus() gin.HandlerFunc
+	GetMenuById() gin.HandlerFunc
+	UpdateMenuById() gin.HandlerFunc
+	DeleteMenuById() gin.HandlerFunc
+}
