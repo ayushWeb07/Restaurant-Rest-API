@@ -47,7 +47,8 @@ func (app *App) RegisterRouters() {
 	routers.SetupOrderItemRouter(v1Router, app.Logger)
 
 	// setup table router
-	routers.SetupTableRouter(v1Router, app.Logger)
+	tableRouter := routers.NewTableRouter(app.ServerConfig, app.Logger, app.MongoClient)
+	tableRouter.Register(v1Router)
 }
 
 func (app *App) Run() {

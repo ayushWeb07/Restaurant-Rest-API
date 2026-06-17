@@ -43,3 +43,11 @@ type OrderServiceInterface interface {
 	UpdateOrderById()
 	DeleteOrderById()
 }
+
+type TableServiceInterface interface {
+	CreateTable()
+	GetAllTables()
+	GetTableById()
+	UpdateTableById()
+	DeleteTableById()
+}

@@ -38,3 +38,11 @@ type OrderRepositoryInterface interface {
 	UpdateOrderById()
 	DeleteOrderById()
 }
+
+type TableRepositoryInterface interface {
+	CreateTable()
+	GetAllTables()
+	GetTableById()
+	UpdateTableById()
+	DeleteTableById()
+}
